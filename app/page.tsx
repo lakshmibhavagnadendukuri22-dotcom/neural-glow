@@ -14,12 +14,16 @@ export default function Home() {
 
   useEffect(() => {
 
-    fetch("/palettes.json")
-  .then(res => res.json())
-  .then(data => {
-    setPalettes(data)
-    if(data.length>0) setSelected(data[0])
-  })
+    useEffect(() => {
+
+  fetch("/palettes/palettes.json")
+    .then(res => res.json())
+    .then(data => {
+      setPalettes(data)
+      if(data.length > 0) setSelected(data[0])
+    })
+
+}, [])
 
   }, [])
 

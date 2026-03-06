@@ -14,12 +14,12 @@ export default function Home() {
 
   useEffect(() => {
 
-    fetch("https://neural-glow-backend.onrender.com/palettes")
-      .then(res => res.json())
-      .then(data => {
-        setPalettes(data)
-        if(data.length > 0) setSelected(data[0])
-      })
+    fetch("/palettes.json")
+  .then(res => res.json())
+  .then(data => {
+    setPalettes(data)
+    if(data.length>0) setSelected(data[0])
+  })
 
   }, [])
 

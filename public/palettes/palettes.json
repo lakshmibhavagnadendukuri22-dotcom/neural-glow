@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "Aurora Bloom",
+    "lip": "#d94f70",
+    "blush": "#ffb6c1",
+    "highlight": "#fff2cc"
+  },
+  {
+    "id": 2,
+    "name": "Golden Hour",
+    "lip": "#b83b5e",
+    "blush": "#ff9aa2",
+    "highlight": "#ffe29a"
+  }
+]

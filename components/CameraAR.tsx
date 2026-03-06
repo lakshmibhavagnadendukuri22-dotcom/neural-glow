@@ -113,12 +113,13 @@ if(videoRef.current){
     <div style={{position:"relative"}}>
 
       <video
-        ref={videoRef}
-        autoPlay
-        playsInline
-        width={640}
-        height={480}
-      />
+  ref={videoRef}
+  autoPlay
+  playsInline
+  muted
+  width={640}
+  height={480}
+/>
 
       <canvas
         ref={canvasRef}

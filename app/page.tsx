@@ -1,45 +1,73 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
+import dynamic from "next/dynamic"
+
+const CameraAR = dynamic(() => import("../components/CameraAR"), {
+  ssr: false
+})
 
 export default function Home() {
 
-  const [palettes, setPalettes] = useState<any[]>([])
+  const [palettes, setPalettes] = useState([])
+  const [selected, setSelected] = useState(null)
 
   useEffect(() => {
 
-    fetch("http://localhost:5000/palettes")
+    fetch("https://neural-glow-backend.onrender.com/palettes")
       .then(res => res.json())
-      .then(data => setPalettes(data))
+      .then(data => {
+        setPalettes(data)
+        if(data.length > 0) setSelected(data[0])
+      })
 
   }, [])
 
   return (
 
-    <main style={{padding:"40px"}}>
+    <main
+      style={{
+        background:"#000",
+        color:"#fff",
+        minHeight:"100vh",
+        padding:"30px",
+        fontFamily:"sans-serif"
+      }}
+    >
 
-      <h1>Neural Glow</h1>
+      <h1 style={{fontSize:"36px"}}>Neural Glow</h1>
 
-      <h2>Available Palettes</h2>
+      <p>AI Bio-Responsive Virtual Beauty</p>
 
-      {palettes.map(p => (
+      <h2 style={{marginTop:"30px"}}>Live Try-On</h2>
 
-        <div key={p.id} style={{
-          border:"1px solid #ccc",
-          padding:"10px",
-          marginBottom:"10px"
-        }}>
+      {selected && <CameraAR palette={selected}/>}
 
-          <h3>{p.name}</h3>
-          <p>Lip: {p.lip}</p>
-          <p>Blush: {p.blush}</p>
-          <p>Highlight: {p.highlight}</p>
+      <h2 style={{marginTop:"40px"}}>Palettes</h2>
 
-        </div>
+      <div style={{display:"flex",gap:"10px",flexWrap:"wrap"}}>
 
-      ))}
+        {palettes.map((p:any)=>(
+          <button
+            key={p.id}
+            onClick={()=>setSelected(p)}
+            style={{
+              padding:"10px",
+              borderRadius:"8px",
+              border:"1px solid #555",
+              background:"#111",
+              color:"#fff",
+              cursor:"pointer"
+            }}
+          >
+            {p.name}
+          </button>
+        ))}
+
+      </div>
 
     </main>
 
   )
+
 }

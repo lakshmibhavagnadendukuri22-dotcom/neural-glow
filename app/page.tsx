@@ -19,50 +19,44 @@ export default function Home() {
   const [selected, setSelected] = useState<Palette | null>(null);
 
   useEffect(() => {
-
     fetch("/palettes/palettes.json")
-      .then((res) => res.json())
+      .then(res => res.json())
       .then((data: Palette[]) => {
         setPalettes(data);
-        if (data.length > 0) setSelected(data[0]);
+        setSelected(data[0]);
       });
-
   }, []);
 
   return (
+    <main style={{
+      background:"#000",
+      color:"#fff",
+      minHeight:"100vh",
+      padding:"30px",
+      fontFamily:"sans-serif"
+    }}>
 
-    <main
-      style={{
-        background: "#000",
-        color: "#fff",
-        minHeight: "100vh",
-        padding: "30px",
-        fontFamily: "sans-serif",
-      }}
-    >
-
-      <h1 style={{ fontSize: "36px" }}>Neural Glow</h1>
-
+      <h1 style={{fontSize:"36px"}}>Neural Glow</h1>
       <p>AI Bio-Responsive Virtual Beauty</p>
 
-      <h2 style={{ marginTop: "30px" }}>Live Try-On</h2>
+      <h2 style={{marginTop:"30px"}}>Live Try-On</h2>
 
-      {selected && <CameraAR palette={selected} />}
+      {selected && <CameraAR palette={selected}/>}
 
-      <h2 style={{ marginTop: "40px" }}>Palettes</h2>
+      <h2 style={{marginTop:"40px"}}>Palettes</h2>
 
-      <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-        {palettes.map((p) => (
+      <div style={{display:"flex",gap:"10px",flexWrap:"wrap"}}>
+        {palettes.map(p=>(
           <button
             key={p.id}
-            onClick={() => setSelected(p)}
+            onClick={()=>setSelected(p)}
             style={{
-              padding: "10px 16px",
-              borderRadius: "8px",
-              border: "1px solid #555",
-              background: selected?.id === p.id ? "#444" : "#111",
-              color: "#fff",
-              cursor: "pointer",
+              padding:"10px 16px",
+              borderRadius:"8px",
+              border:"1px solid #555",
+              background:selected?.id===p.id?"#444":"#111",
+              color:"#fff",
+              cursor:"pointer"
             }}
           >
             {p.name}
@@ -70,18 +64,18 @@ export default function Home() {
         ))}
       </div>
 
-      <h2 style={{ marginTop: "40px" }}>Create Your Own Palette</h2>
+      <h2 style={{marginTop:"40px"}}>Customize Palette</h2>
 
-      <div style={{ display: "flex", gap: "20px", marginTop: "10px" }}>
+      <div style={{display:"flex",gap:"20px"}}>
 
         <label>
           Lip
           <input
             type="color"
             value={selected?.lip || "#d94f70"}
-            onChange={(e) =>
-              setSelected((prev) =>
-                prev ? { ...prev, lip: e.target.value } : prev
+            onChange={(e)=>
+              setSelected(prev =>
+                prev ? {...prev,lip:e.target.value} : prev
               )
             }
           />
@@ -92,9 +86,9 @@ export default function Home() {
           <input
             type="color"
             value={selected?.blush || "#ff8fa3"}
-            onChange={(e) =>
-              setSelected((prev) =>
-                prev ? { ...prev, blush: e.target.value } : prev
+            onChange={(e)=>
+              setSelected(prev =>
+                prev ? {...prev,blush:e.target.value} : prev
               )
             }
           />
@@ -105,9 +99,9 @@ export default function Home() {
           <input
             type="color"
             value={selected?.highlight || "#fff2cc"}
-            onChange={(e) =>
-              setSelected((prev) =>
-                prev ? { ...prev, highlight: e.target.value } : prev
+            onChange={(e)=>
+              setSelected(prev =>
+                prev ? {...prev,highlight:e.target.value} : prev
               )
             }
           />
@@ -116,6 +110,5 @@ export default function Home() {
       </div>
 
     </main>
-
   );
 }

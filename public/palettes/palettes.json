@@ -1,44 +1,44 @@
 [
-  {
-    "id":1,
-    "name":"Aurora Bloom",
-    "lip":"#d94f70",
-    "blush":"#ff8fa3",
-    "highlight":"#fff2cc"
-  },
-  {
-    "id":2,
-    "name":"Golden Hour",
-    "lip":"#b83b5e",
-    "blush":"#ff9aa2",
-    "highlight":"#ffe29a"
-  },
-  {
-    "id":3,
-    "name":"Cherry Kiss",
-    "lip":"#a4133c",
-    "blush":"#ff758f",
-    "highlight":"#ffd6a5"
-  },
-  {
-    "id":4,
-    "name":"Peach Glow",
-    "lip":"#ff7b54",
-    "blush":"#ffa69e",
-    "highlight":"#ffe8d6"
-  },
-  {
-    "id":5,
-    "name":"Berry Luxe",
-    "lip":"#6a0572",
-    "blush":"#c77dff",
-    "highlight":"#e0aaff"
-  },
-  {
-    "id":6,
-    "name":"Rose Velvet",
-    "lip":"#c9184a",
-    "blush":"#ff8fab",
-    "highlight":"#ffc2d1"
-  }
+{
+"id":1,
+"name":"Classic Rose",
+"lip":"#d7265b",
+"blush":"#ff6f91",
+"highlight":"#ffe6cc"
+},
+{
+"id":2,
+"name":"Peach Glow",
+"lip":"#ff5e5b",
+"blush":"#ff9a8b",
+"highlight":"#ffe0b3"
+},
+{
+"id":3,
+"name":"Berry Luxe",
+"lip":"#8b1e3f",
+"blush":"#d66a7c",
+"highlight":"#f5d7c3"
+},
+{
+"id":4,
+"name":"Coral Sunset",
+"lip":"#ff6b6b",
+"blush":"#ff8fa3",
+"highlight":"#ffd8a8"
+},
+{
+"id":5,
+"name":"Soft Pink",
+"lip":"#e64980",
+"blush":"#faa2c1",
+"highlight":"#fff3bf"
+},
+{
+"id":6,
+"name":"Wine Glam",
+"lip":"#7b2cbf",
+"blush":"#c77dff",
+"highlight":"#f1c0e8"
+}
 ]

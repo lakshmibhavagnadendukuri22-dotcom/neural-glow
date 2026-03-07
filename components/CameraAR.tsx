@@ -91,7 +91,7 @@ export default function CameraAR({ palette }: { palette: Palette }) {
 
     function drawBlush(ctx: any, landmarks: any, color: string, w: number, h: number) {
 
-      ctx.globalAlpha = 0.28;
+      ctx.globalAlpha = 0.16;
 
       const left = landmarks[50];
       const right = landmarks[280];

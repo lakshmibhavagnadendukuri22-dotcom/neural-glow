@@ -35,19 +35,26 @@ style={{
 minHeight:"100vh",
 padding:"40px",
 fontFamily:"system-ui, sans-serif",
-background:
-"linear-gradient(135deg,#ffd6e0,#ffe5ec,#f8edff,#e7f0ff)",
-color:"#2b2b2b"
+background:"linear-gradient(135deg,#ffd6e0,#ffe5ec,#f8edff,#e7f0ff)",
+color:"#2b2b2b",
+display:"flex",
+flexDirection:"column",
+alignItems:"center"
 }}
 >
 
-{/* APP TITLE */}
+{/* TITLE */}
 
-<div style={{marginBottom:"30px"}}>
+<div
+style={{
+marginBottom:"30px",
+textAlign:"center"
+}}
+>
 
 <h1
 style={{
-fontSize:"46px",
+fontSize:"48px",
 fontWeight:800,
 letterSpacing:"-1px",
 background:"linear-gradient(90deg,#ff4d8d,#9b5cff)",
@@ -58,25 +65,26 @@ color:"transparent"
 Neural Glow
 </h1>
 
-<p style={{opacity:0.6}}>
+<p style={{opacity:0.65}}>
 ✨ AI Makeup Try-On
 </p>
 
 </div>
 
 
-{/* CAMERA SECTION */}
+{/* CAMERA */}
 
 <div
 style={{
-marginTop:"20px",
+marginTop:"10px",
 padding:"22px",
 borderRadius:"22px",
 background:"rgba(255,255,255,0.65)",
 backdropFilter:"blur(14px)",
 border:"1px solid rgba(255,255,255,0.6)",
 boxShadow:"0 10px 30px rgba(0,0,0,0.1)",
-display:"inline-block"
+display:"flex",
+justifyContent:"center"
 }}
 >
 
@@ -85,17 +93,18 @@ display:"inline-block"
 </div>
 
 
-{/* PALETTE SELECTOR */}
+{/* PALETTES */}
 
-<div style={{marginTop:"35px"}}>
+<div style={{marginTop:"35px",textAlign:"center"}}>
 
-<h3 style={{marginBottom:"10px"}}>🎨 Palettes</h3>
+<h3 style={{marginBottom:"12px"}}>🎨 Palettes</h3>
 
 <div
 style={{
 display:"flex",
 gap:"18px",
-flexWrap:"wrap"
+flexWrap:"wrap",
+justifyContent:"center"
 }}
 >
 
@@ -158,23 +167,31 @@ fontWeight:500
 
 {/* CUSTOM COLORS */}
 
-<div style={{marginTop:"35px"}}>
+<div style={{marginTop:"35px",textAlign:"center"}}>
 
-<h3 style={{marginBottom:"10px"}}>🧴 Custom</h3>
+<h3 style={{marginBottom:"12px"}}>🧴 Custom</h3>
 
 <div
 style={{
 display:"flex",
-gap:"35px",
+gap:"40px",
 padding:"20px",
 borderRadius:"18px",
 background:"rgba(255,255,255,0.65)",
 border:"1px solid rgba(0,0,0,0.08)",
-boxShadow:"0 6px 16px rgba(0,0,0,0.08)"
+boxShadow:"0 6px 16px rgba(0,0,0,0.08)",
+justifyContent:"center"
 }}
 >
 
-<label style={{display:"flex",flexDirection:"column",gap:"8px"}}>
+<label
+style={{
+display:"flex",
+flexDirection:"column",
+gap:"8px",
+alignItems:"center"
+}}
+>
 
 💄 Lip
 
@@ -190,7 +207,14 @@ prev ? {...prev,lip:e.target.value} : prev
 
 </label>
 
-<label style={{display:"flex",flexDirection:"column",gap:"8px"}}>
+<label
+style={{
+display:"flex",
+flexDirection:"column",
+gap:"8px",
+alignItems:"center"
+}}
+>
 
 🌸 Blush
 

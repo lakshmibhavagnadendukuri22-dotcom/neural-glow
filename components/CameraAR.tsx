@@ -89,40 +89,56 @@ export default function CameraAR({ palette }: { palette: Palette }) {
       ctx.globalCompositeOperation = "source-over";
     }
 
-    function drawBlush(ctx: any, landmarks: any, color: string, w: number, h: number) {
+    function drawBlush(
+  ctx: CanvasRenderingContext2D,
+  landmarks: any,
+  color: string,
+  w: number,
+  h: number
+) {
 
-      ctx.globalAlpha = 0.16;
+  ctx.globalAlpha = 0.25;
 
-      const left = landmarks[50];
-      const right = landmarks[280];
+  const leftCheek = landmarks[234];
+  const leftCheekOuter = landmarks[50];
 
-      const lx = left.x * w;
-      const ly = left.y * h;
+  const rightCheek = landmarks[454];
+  const rightCheekOuter = landmarks[280];
 
-      const rx = right.x * w;
-      const ry = right.y * h;
+  if (!leftCheek || !rightCheek) return;
 
-      const gradL = ctx.createRadialGradient(lx, ly, 10, lx, ly, 60);
-      gradL.addColorStop(0, color);
-      gradL.addColorStop(0.6, color);
-      gradL.addColorStop(1, "transparent");
+  const lx = ((leftCheek.x + leftCheekOuter.x) / 2) * w;
+  const ly = ((leftCheek.y + leftCheekOuter.y) / 2) * h;
 
-      ctx.fillStyle = gradL;
-      ctx.beginPath();
-      ctx.ellipse(lx, ly, 60, 35, -0.4, 0, Math.PI * 2);
-      ctx.fill();
+  const rx = ((rightCheek.x + rightCheekOuter.x) / 2) * w;
+  const ry = ((rightCheek.y + rightCheekOuter.y) / 2) * h;
 
-      const gradR = ctx.createRadialGradient(rx, ry, 10, rx, ry, 60);
-      gradR.addColorStop(0, color);
-      gradR.addColorStop(0.6, color);
-      gradR.addColorStop(1, "transparent");
+  const faceWidth =
+    Math.abs(landmarks[234].x - landmarks[454].x) * w;
 
-      ctx.fillStyle = gradR;
-      ctx.beginPath();
-      ctx.ellipse(rx, ry, 60, 35, 0.4, 0, Math.PI * 2);
-      ctx.fill();
-    }
+  const radius = faceWidth * 0.12;
 
+  const gradL = ctx.createRadialGradient(lx, ly, radius * 0.2, lx, ly, radius);
+  gradL.addColorStop(0, color);
+  gradL.addColorStop(0.7, color);
+  gradL.addColorStop(1, "transparent");
+
+  ctx.fillStyle = gradL;
+  ctx.beginPath();
+  ctx.arc(lx, ly, radius, 0, Math.PI * 2);
+  ctx.fill();
+
+  const gradR = ctx.createRadialGradient(rx, ry, radius * 0.2, rx, ry, radius);
+  gradR.addColorStop(0, color);
+  gradR.addColorStop(0.7, color);
+  gradR.addColorStop(1, "transparent");
+
+  ctx.fillStyle = gradR;
+  ctx.beginPath();
+  ctx.arc(rx, ry, radius, 0, Math.PI * 2);
+  ctx.fill();
+
+}
     function drawHighlight(ctx: any, landmarks: any, color: string, w: number, h: number) {
 
       ctx.globalAlpha = 0.10;

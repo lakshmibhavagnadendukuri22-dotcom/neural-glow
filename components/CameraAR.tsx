@@ -187,91 +187,93 @@ function drawLips(ctx:any, landmarks:any, color:string){
 
 function drawBlush(ctx:any, landmarks:any, color:string, w:number, h:number){
 
-  ctx.globalAlpha = 0.18
+  ctx.globalAlpha = 0.16
 
-  const left = landmarks[50]
-  const right = landmarks[280]
+  const cheekLeft = landmarks[50]
+  const cheekRight = landmarks[280]
+  const cheekTopL = landmarks[116]
+  const cheekTopR = landmarks[345]
 
-  if(!left || !right) return
+  if(!cheekLeft || !cheekRight) return
 
-  const lx = left.x * w
-  const ly = left.y * h
+  const lx = cheekLeft.x * w
+  const ly = cheekLeft.y * h
 
-  const rx = right.x * w
-  const ry = right.y * h
+  const rx = cheekRight.x * w
+  const ry = cheekRight.y * h
 
-  const gL = ctx.createRadialGradient(lx,ly,2,lx,ly,35)
-  gL.addColorStop(0,color)
-  gL.addColorStop(1,"transparent")
+  const gradL = ctx.createRadialGradient(lx,ly,10,lx,ly,60)
+  gradL.addColorStop(0,color)
+  gradL.addColorStop(1,"transparent")
 
-  ctx.fillStyle = gL
+  ctx.fillStyle = gradL
   ctx.beginPath()
-  ctx.arc(lx,ly,35,0,Math.PI*2)
+  ctx.ellipse(lx,ly,60,35,-0.4,0,Math.PI*2)
   ctx.fill()
 
-  const gR = ctx.createRadialGradient(rx,ry,2,rx,ry,35)
-  gR.addColorStop(0,color)
-  gR.addColorStop(1,"transparent")
+  const gradR = ctx.createRadialGradient(rx,ry,10,rx,ry,60)
+  gradR.addColorStop(0,color)
+  gradR.addColorStop(1,"transparent")
 
-  ctx.fillStyle = gR
+  ctx.fillStyle = gradR
   ctx.beginPath()
-  ctx.arc(rx,ry,35,0,Math.PI*2)
+  ctx.ellipse(rx,ry,60,35,0.4,0,Math.PI*2)
   ctx.fill()
 
 }
 
 function drawHighlight(ctx:any, landmarks:any, color:string, w:number, h:number){
 
-  ctx.globalAlpha = 0.12
+  ctx.globalAlpha = 0.08
 
   const nose = landmarks[6]
-  const cheekL = landmarks[116]
-  const cheekR = landmarks[345]
+  const cheekboneL = landmarks[116]
+  const cheekboneR = landmarks[345]
 
   if(nose){
 
     const x = nose.x * w
     const y = nose.y * h
 
-    const grad = ctx.createRadialGradient(x,y,2,x,y,18)
+    const grad = ctx.createRadialGradient(x,y,2,x,y,20)
     grad.addColorStop(0,color)
     grad.addColorStop(1,"transparent")
 
     ctx.fillStyle = grad
     ctx.beginPath()
-    ctx.ellipse(x,y,6,18,0,0,Math.PI*2)
+    ctx.ellipse(x,y,8,20,0,0,Math.PI*2)
     ctx.fill()
 
   }
 
-  if(cheekL){
+  if(cheekboneL){
 
-    const x = cheekL.x * w
-    const y = cheekL.y * h
+    const x = cheekboneL.x * w
+    const y = cheekboneL.y * h
 
-    const grad = ctx.createRadialGradient(x,y,2,x,y,22)
+    const grad = ctx.createRadialGradient(x,y,5,x,y,35)
     grad.addColorStop(0,color)
     grad.addColorStop(1,"transparent")
 
     ctx.fillStyle = grad
     ctx.beginPath()
-    ctx.ellipse(x,y,22,8,-0.4,0,Math.PI*2)
+    ctx.ellipse(x,y,35,10,-0.4,0,Math.PI*2)
     ctx.fill()
 
   }
 
-  if(cheekR){
+  if(cheekboneR){
 
-    const x = cheekR.x * w
-    const y = cheekR.y * h
+    const x = cheekboneR.x * w
+    const y = cheekboneR.y * h
 
-    const grad = ctx.createRadialGradient(x,y,2,x,y,22)
+    const grad = ctx.createRadialGradient(x,y,5,x,y,35)
     grad.addColorStop(0,color)
     grad.addColorStop(1,"transparent")
 
     ctx.fillStyle = grad
     ctx.beginPath()
-    ctx.ellipse(x,y,22,8,0.4,0,Math.PI*2)
+    ctx.ellipse(x,y,35,10,0.4,0,Math.PI*2)
     ctx.fill()
 
   }

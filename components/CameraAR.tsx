@@ -126,56 +126,49 @@ function drawBlush(
   h: number
 ) {
 
-  ctx.globalAlpha = 0.18   // very soft opacity
+  ctx.globalAlpha = 0.20;
 
-  const leftCheekbone = l[116]
-  const rightCheekbone = l[345]
+  const left = l[50];
+  const right = l[280];
 
-  if (!leftCheekbone || !rightCheekbone) return
+  if (!left || !right) return;
 
-  const faceWidth = Math.abs(l[234].x - l[454].x) * w
+  const faceWidth = Math.abs(l[234].x - l[454].x) * w;
 
-  const width = faceWidth * 0.35
-  const height = faceWidth * 0.16
+  const width = faceWidth * 0.28;
+  const height = faceWidth * 0.16;
 
-  // LEFT BLUSH POSITION
-  const lx = (leftCheekbone.x * w) + width * 0.35
-  const ly = (leftCheekbone.y * h) - height * 0.15
+  // LEFT CHEEK (slightly outward + slightly downward from cheek landmark)
+  const lx = (left.x * w) + width * 0.25;
+  const ly = (left.y * h) + height * 0.15;
 
-  const gradL = ctx.createRadialGradient(
-    lx, ly, width * 0.05,
-    lx, ly, width
-  )
+  const gradL = ctx.createRadialGradient(lx, ly, width * 0.05, lx, ly, width);
 
-  gradL.addColorStop(0, color)
-  gradL.addColorStop(0.3, color)
-  gradL.addColorStop(1, "transparent")
+  gradL.addColorStop(0, color);
+  gradL.addColorStop(0.35, color);
+  gradL.addColorStop(1, "transparent");
 
-  ctx.fillStyle = gradL
+  ctx.fillStyle = gradL;
 
-  ctx.beginPath()
-  ctx.ellipse(lx, ly, width, height, -0.55, 0, Math.PI * 2)
-  ctx.fill()
+  ctx.beginPath();
+  ctx.ellipse(lx, ly, width, height, -0.45, 0, Math.PI * 2);
+  ctx.fill();
 
-  // RIGHT BLUSH POSITION
-  const rx = (rightCheekbone.x * w) - width * 0.35
-  const ry = (rightCheekbone.y * h) - height * 0.15
+  // RIGHT CHEEK
+  const rx = (right.x * w) - width * 0.25;
+  const ry = (right.y * h) + height * 0.15;
 
-  const gradR = ctx.createRadialGradient(
-    rx, ry, width * 0.05,
-    rx, ry, width
-  )
+  const gradR = ctx.createRadialGradient(rx, ry, width * 0.05, rx, ry, width);
 
-  gradR.addColorStop(0, color)
-  gradR.addColorStop(0.3, color)
-  gradR.addColorStop(1, "transparent")
+  gradR.addColorStop(0, color);
+  gradR.addColorStop(0.35, color);
+  gradR.addColorStop(1, "transparent");
 
-  ctx.fillStyle = gradR
+  ctx.fillStyle = gradR;
 
-  ctx.beginPath()
-  ctx.ellipse(rx, ry, width, height, 0.55, 0, Math.PI * 2)
-  ctx.fill()
-
+  ctx.beginPath();
+  ctx.ellipse(rx, ry, width, height, 0.45, 0, Math.PI * 2);
+  ctx.fill();
 }
 
 

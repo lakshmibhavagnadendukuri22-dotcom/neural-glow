@@ -150,7 +150,7 @@ function drawBlush(
   ctx.fillStyle = gradL;
 
   ctx.beginPath();
-  ctx.ellipse(lx, ly, width, height, -0.45, 0, Math.PI * 2);
+  ctx.ellipse(lx, ly, width, height, 0.45, 0, Math.PI * 2);
   ctx.fill();
 
   // RIGHT CHEEK
@@ -165,7 +165,7 @@ function drawBlush(
   ctx.fillStyle = gradR;
 
   ctx.beginPath();
-  ctx.ellipse(rx, ry, width, height, 0.45, 0, Math.PI * 2);
+  ctx.ellipse(rx, ry, width, height, -0.45, 0, Math.PI * 2);
   ctx.fill();
 }
 

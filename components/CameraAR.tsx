@@ -92,9 +92,9 @@ if(videoRef.current){
       const landmarks = results.faceLandmarks[0]
 
       const w = canvas.width
-const h = canvas.height
+      const h = canvas.height
 
-drawLips(ctx, landmarks, palette.lip)
+drawLips(ctx, landmarks, palette.lip, w,h)
 drawBlush(ctx, landmarks, palette.blush, w, h)
 drawHighlight(ctx, landmarks, palette.highlight, w, h)
 
@@ -141,47 +141,57 @@ drawHighlight(ctx, landmarks, palette.highlight, w, h)
 
 }
 
-function drawLips(ctx:any, landmarks:any, color:string){
+function drawLips(ctx:any, landmarks:any, color:string, w:number, h:number){
 
   if(!landmarks) return
 
-  const upperLip = [
-    61,146,91,181,84,17,314,405,321,375,291
+  const outer = [
+    61,146,91,181,84,17,314,405,321,375,291,
+    308,324,318,402,317,14,87,178,88,95,78
   ]
 
-  const lowerLip = [
-    61,185,40,39,37,0,267,269,270,409,291
+  const inner = [
+    78,95,88,178,87,14,317,402,318,324,308
   ]
 
-  ctx.fillStyle = color
   ctx.globalAlpha = 0.55
+  ctx.fillStyle = color
+
+  // Draw outer lip shape
   ctx.beginPath()
 
-  upperLip.forEach((p:number,i:number)=>{
+  outer.forEach((i:number,index:number)=>{
 
-    if(!landmarks[p]) return
+    const x = landmarks[i].x * w
+    const y = landmarks[i].y * h
 
-    const x = landmarks[p].x * 640
-    const y = landmarks[p].y * 480
-
-    if(i===0) ctx.moveTo(x,y)
+    if(index===0) ctx.moveTo(x,y)
     else ctx.lineTo(x,y)
-
-  })
-
-  lowerLip.reverse().forEach((p:number)=>{
-
-    if(!landmarks[p]) return
-
-    const x = landmarks[p].x * 640
-    const y = landmarks[p].y * 480
-
-    ctx.lineTo(x,y)
 
   })
 
   ctx.closePath()
   ctx.fill()
+
+  // Cut out inner mouth (teeth area)
+  ctx.globalCompositeOperation = "destination-out"
+
+  ctx.beginPath()
+
+  inner.forEach((i:number,index:number)=>{
+
+    const x = landmarks[i].x * w
+    const y = landmarks[i].y * h
+
+    if(index===0) ctx.moveTo(x,y)
+    else ctx.lineTo(x,y)
+
+  })
+
+  ctx.closePath()
+  ctx.fill()
+
+  ctx.globalCompositeOperation = "source-over"
 
 }
 

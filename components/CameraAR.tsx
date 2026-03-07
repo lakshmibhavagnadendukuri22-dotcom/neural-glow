@@ -8,7 +8,6 @@ type Palette={
   name:string
   lip:string
   blush:string
-  highlight:string
 }
 
 export default function CameraAR({palette}:{palette:Palette}){
@@ -46,112 +45,166 @@ detect()
 
 }
 
-function drawLips(ctx:any,l:any,color:string,w:number,h:number){
+function drawLips(
+  ctx: CanvasRenderingContext2D,
+  l: any,
+  color: string,
+  w: number,
+  h: number
+){
 
-const outer=[61,146,91,181,84,17,314,405,321,375,291]
-const inner=[78,95,88,178,87,14,317,402,318,324,308]
+const upper = [
+61,185,40,39,37,0,267,269,270,409,291
+]
 
-ctx.globalAlpha=0.85
-ctx.fillStyle=color
-ctx.shadowColor=color
-ctx.shadowBlur=6
+const lower = [
+146,91,181,84,17,314,405,321,375
+]
 
+const inner = [
+78,95,88,178,87,14,317,402,318,324,308
+]
+
+ctx.globalAlpha = 0.85
+ctx.fillStyle = color
+ctx.shadowColor = color
+ctx.shadowBlur = 6
+
+// Upper lip
 ctx.beginPath()
 
-outer.forEach((i:number,index:number)=>{
-const x=l[i].x*w
-const y=l[i].y*h
-if(index===0)ctx.moveTo(x,y)
+upper.forEach((i:number,index:number)=>{
+const x = l[i].x * w
+const y = l[i].y * h
+
+if(index===0) ctx.moveTo(x,y)
 else ctx.lineTo(x,y)
 })
 
 ctx.closePath()
 ctx.fill()
 
-ctx.globalCompositeOperation="destination-out"
+// Lower lip
+ctx.beginPath()
+
+lower.forEach((i:number,index:number)=>{
+const x = l[i].x * w
+const y = l[i].y * h
+
+if(index===0) ctx.moveTo(x,y)
+else ctx.lineTo(x,y)
+})
+
+ctx.closePath()
+ctx.fill()
+
+// Remove teeth area
+ctx.globalCompositeOperation = "destination-out"
 
 ctx.beginPath()
 
 inner.forEach((i:number,index:number)=>{
-const x=l[i].x*w
-const y=l[i].y*h
-if(index===0)ctx.moveTo(x,y)
+const x = l[i].x * w
+const y = l[i].y * h
+
+if(index===0) ctx.moveTo(x,y)
 else ctx.lineTo(x,y)
 })
 
 ctx.closePath()
 ctx.fill()
 
-ctx.globalCompositeOperation="source-over"
+ctx.globalCompositeOperation = "source-over"
 
 }
 
-function drawBlush(ctx:any,l:any,color:string,w:number,h:number){
+function drawBlush(
+  ctx: CanvasRenderingContext2D,
+  l: any,
+  color: string,
+  w: number,
+  h: number
+){
 
-ctx.globalAlpha=0.35
+ctx.globalAlpha = 0.28
 
-const left=l[234]
-const right=l[454]
+const leftCheek = l[234]
+const rightCheek = l[454]
 
-const lx=left.x*w
-const ly=left.y*h
+const lx = leftCheek.x * w
+const ly = leftCheek.y * h
 
-const rx=right.x*w
-const ry=right.y*h
+const rx = rightCheek.x * w
+const ry = rightCheek.y * h
 
-const faceWidth=Math.abs(l[234].x-l[454].x)*w
+const faceWidth = Math.abs(l[234].x - l[454].x) * w
 
-const width=faceWidth*0.25
-const height=faceWidth*0.15
+const radius = faceWidth * 0.28
 
-const gradL=ctx.createRadialGradient(lx,ly,20,lx,ly,width)
+// LEFT CHEEK LAYER 1
+const grad1 = ctx.createRadialGradient(
+lx, ly, radius * 0.1,
+lx, ly, radius
+)
 
-gradL.addColorStop(0,color)
-gradL.addColorStop(0.3,color)
-gradL.addColorStop(1,"transparent")
+grad1.addColorStop(0, color)
+grad1.addColorStop(0.4, color)
+grad1.addColorStop(1, "transparent")
 
-ctx.fillStyle=gradL
-
+ctx.fillStyle = grad1
 ctx.beginPath()
-ctx.ellipse(lx,ly,width,height,-0.4,0,Math.PI*2)
+ctx.arc(lx, ly, radius, 0, Math.PI * 2)
 ctx.fill()
 
-const gradR=ctx.createRadialGradient(rx,ry,20,rx,ry,width)
+// LEFT CHEEK LAYER 2 (diffusion layer)
 
-gradR.addColorStop(0,color)
-gradR.addColorStop(0.3,color)
-gradR.addColorStop(1,"transparent")
+const grad2 = ctx.createRadialGradient(
+lx + radius*0.15, ly - radius*0.1, radius * 0.1,
+lx, ly, radius*1.2
+)
 
-ctx.fillStyle=gradR
+grad2.addColorStop(0, color)
+grad2.addColorStop(0.25, color)
+grad2.addColorStop(1, "transparent")
 
+ctx.fillStyle = grad2
 ctx.beginPath()
-ctx.ellipse(rx,ry,width,height,0.4,0,Math.PI*2)
+ctx.arc(lx, ly, radius*1.2, 0, Math.PI * 2)
+ctx.fill()
+
+// RIGHT CHEEK LAYER 1
+const grad3 = ctx.createRadialGradient(
+rx, ry, radius * 0.1,
+rx, ry, radius
+)
+
+grad3.addColorStop(0, color)
+grad3.addColorStop(0.4, color)
+grad3.addColorStop(1, "transparent")
+
+ctx.fillStyle = grad3
+ctx.beginPath()
+ctx.arc(rx, ry, radius, 0, Math.PI * 2)
+ctx.fill()
+
+// RIGHT CHEEK LAYER 2
+
+const grad4 = ctx.createRadialGradient(
+rx - radius*0.15, ry - radius*0.1, radius * 0.1,
+rx, ry, radius*1.2
+)
+
+grad4.addColorStop(0, color)
+grad4.addColorStop(0.25, color)
+grad4.addColorStop(1, "transparent")
+
+ctx.fillStyle = grad4
+ctx.beginPath()
+ctx.arc(rx, ry, radius*1.2, 0, Math.PI * 2)
 ctx.fill()
 
 }
 
-function drawHighlight(ctx:any,l:any,color:string,w:number,h:number){
-
-ctx.globalAlpha=0.25
-
-const nose=l[6]
-
-const x=nose.x*w
-const y=nose.y*h
-
-const grad=ctx.createRadialGradient(x,y,2,x,y,30)
-
-grad.addColorStop(0,color)
-grad.addColorStop(0.5,color)
-grad.addColorStop(1,"transparent")
-
-ctx.fillStyle=grad
-
-ctx.beginPath()
-ctx.ellipse(x,y,12,30,0,0,Math.PI*2)
-ctx.fill()
-
-}
 
 function detect(){
 
@@ -183,7 +236,7 @@ const l=results.faceLandmarks[0]
 
 drawLips(ctx,l,palette.lip,canvas.width,canvas.height)
 drawBlush(ctx,l,palette.blush,canvas.width,canvas.height)
-drawHighlight(ctx,l,palette.highlight,canvas.width,canvas.height)
+
 
 }
 

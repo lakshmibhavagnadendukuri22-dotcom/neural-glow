@@ -10,7 +10,6 @@ type Palette = {
   name: string;
   lip: string;
   blush: string;
-  highlight: string;
 };
 
 export default function Home() {
@@ -94,18 +93,7 @@ export default function Home() {
           />
         </label>
 
-        <label>
-          Highlight
-          <input
-            type="color"
-            value={selected?.highlight || "#fff2cc"}
-            onChange={(e)=>
-              setSelected(prev =>
-                prev ? {...prev,highlight:e.target.value} : prev
-              )
-            }
-          />
-        </label>
+        
 
       </div>
 

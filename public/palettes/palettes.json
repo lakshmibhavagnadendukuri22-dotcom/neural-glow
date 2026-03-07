@@ -17,28 +17,24 @@
 "id":3,
 "name":"Berry Luxe",
 "lip":"#8b1e3f",
-"blush":"#d66a7c",
-"highlight":"#f5d7c3"
+"blush":"#d66a7c"
 },
 {
 "id":4,
 "name":"Coral Sunset",
 "lip":"#ff6b6b",
-"blush":"#ff8fa3",
-"highlight":"#ffd8a8"
+"blush":"#ff8fa3"
 },
 {
 "id":5,
 "name":"Soft Pink",
 "lip":"#e64980",
-"blush":"#faa2c1",
-"highlight":"#fff3bf"
+"blush":"#faa2c1"
 },
 {
 "id":6,
 "name":"Wine Glam",
 "lip":"#7b2cbf",
-"blush":"#c77dff",
-"highlight":"#f1c0e8"
+"blush":"#c77dff"
 }
 ]

@@ -126,81 +126,53 @@ function drawBlush(
   h: number
 ){
 
-ctx.globalAlpha = 0.28
+ctx.globalAlpha = 0.25
 
-const leftCheek = l[234]
-const rightCheek = l[454]
+const left = l[116]
+const right = l[345]
 
-const lx = leftCheek.x * w
-const ly = leftCheek.y * h
-
-const rx = rightCheek.x * w
-const ry = rightCheek.y * h
+if(!left || !right) return
 
 const faceWidth = Math.abs(l[234].x - l[454].x) * w
 
-const radius = faceWidth * 0.28
+const size = faceWidth * 0.18
 
-// LEFT CHEEK LAYER 1
-const grad1 = ctx.createRadialGradient(
-lx, ly, radius * 0.1,
-lx, ly, radius
+// LEFT CHEEK
+const lx = (left.x * w) + size * 0.3
+const ly = (left.y * h) - size * 0.1
+
+const gradL = ctx.createRadialGradient(
+lx, ly, size * 0.2,
+lx, ly, size
 )
 
-grad1.addColorStop(0, color)
-grad1.addColorStop(0.4, color)
-grad1.addColorStop(1, "transparent")
+gradL.addColorStop(0, color)
+gradL.addColorStop(0.5, color)
+gradL.addColorStop(1, "transparent")
 
-ctx.fillStyle = grad1
+ctx.fillStyle = gradL
+
 ctx.beginPath()
-ctx.arc(lx, ly, radius, 0, Math.PI * 2)
+ctx.arc(lx, ly, size, 0, Math.PI * 2)
 ctx.fill()
 
-// LEFT CHEEK LAYER 2 (diffusion layer)
+// RIGHT CHEEK
+const rx = (right.x * w) - size * 0.3
+const ry = (right.y * h) - size * 0.1
 
-const grad2 = ctx.createRadialGradient(
-lx + radius*0.15, ly - radius*0.1, radius * 0.1,
-lx, ly, radius*1.2
+const gradR = ctx.createRadialGradient(
+rx, ry, size * 0.2,
+rx, ry, size
 )
 
-grad2.addColorStop(0, color)
-grad2.addColorStop(0.25, color)
-grad2.addColorStop(1, "transparent")
+gradR.addColorStop(0, color)
+gradR.addColorStop(0.5, color)
+gradR.addColorStop(1, "transparent")
 
-ctx.fillStyle = grad2
+ctx.fillStyle = gradR
+
 ctx.beginPath()
-ctx.arc(lx, ly, radius*1.2, 0, Math.PI * 2)
-ctx.fill()
-
-// RIGHT CHEEK LAYER 1
-const grad3 = ctx.createRadialGradient(
-rx, ry, radius * 0.1,
-rx, ry, radius
-)
-
-grad3.addColorStop(0, color)
-grad3.addColorStop(0.4, color)
-grad3.addColorStop(1, "transparent")
-
-ctx.fillStyle = grad3
-ctx.beginPath()
-ctx.arc(rx, ry, radius, 0, Math.PI * 2)
-ctx.fill()
-
-// RIGHT CHEEK LAYER 2
-
-const grad4 = ctx.createRadialGradient(
-rx - radius*0.15, ry - radius*0.1, radius * 0.1,
-rx, ry, radius*1.2
-)
-
-grad4.addColorStop(0, color)
-grad4.addColorStop(0.25, color)
-grad4.addColorStop(1, "transparent")
-
-ctx.fillStyle = grad4
-ctx.beginPath()
-ctx.arc(rx, ry, radius*1.2, 0, Math.PI * 2)
+ctx.arc(rx, ry, size, 0, Math.PI * 2)
 ctx.fill()
 
 }

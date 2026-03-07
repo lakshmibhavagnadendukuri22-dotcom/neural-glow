@@ -145,7 +145,6 @@ function drawBlush(
   const gradL = ctx.createRadialGradient(lx, ly, width * 0.05, lx, ly, width);
 
   gradL.addColorStop(0, color);
-  gradL.addColorStop(0.35, color);
   gradL.addColorStop(1, "transparent");
 
   ctx.fillStyle = gradL;
@@ -161,7 +160,6 @@ function drawBlush(
   const gradR = ctx.createRadialGradient(rx, ry, width * 0.05, rx, ry, width);
 
   gradR.addColorStop(0, color);
-  gradR.addColorStop(0.35, color);
   gradR.addColorStop(1, "transparent");
 
   ctx.fillStyle = gradR;

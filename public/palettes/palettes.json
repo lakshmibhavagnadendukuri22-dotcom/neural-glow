@@ -1,16 +1,44 @@
 [
   {
-    "id": 1,
-    "name": "Aurora Bloom",
-    "lip": "#d94f70",
-    "blush": "#ffb6c1",
-    "highlight": "#fff2cc"
+    "id":1,
+    "name":"Aurora Bloom",
+    "lip":"#d94f70",
+    "blush":"#ff8fa3",
+    "highlight":"#fff2cc"
   },
   {
-    "id": 2,
-    "name": "Golden Hour",
-    "lip": "#b83b5e",
-    "blush": "#ff9aa2",
-    "highlight": "#ffe29a"
+    "id":2,
+    "name":"Golden Hour",
+    "lip":"#b83b5e",
+    "blush":"#ff9aa2",
+    "highlight":"#ffe29a"
+  },
+  {
+    "id":3,
+    "name":"Cherry Kiss",
+    "lip":"#a4133c",
+    "blush":"#ff758f",
+    "highlight":"#ffd6a5"
+  },
+  {
+    "id":4,
+    "name":"Peach Glow",
+    "lip":"#ff7b54",
+    "blush":"#ffa69e",
+    "highlight":"#ffe8d6"
+  },
+  {
+    "id":5,
+    "name":"Berry Luxe",
+    "lip":"#6a0572",
+    "blush":"#c77dff",
+    "highlight":"#e0aaff"
+  },
+  {
+    "id":6,
+    "name":"Rose Velvet",
+    "lip":"#c9184a",
+    "blush":"#ff8fab",
+    "highlight":"#ffc2d1"
   }
 ]

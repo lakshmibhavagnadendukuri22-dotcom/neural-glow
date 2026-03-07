@@ -145,47 +145,60 @@ function drawLips(ctx:any, landmarks:any, color:string, w:number, h:number){
 
   if(!landmarks) return
 
-  const outer = [
-    61,146,91,181,84,17,314,405,321,375,291,
-    308,324,318,402,317,14,87,178,88,95,78
+  const upperLip = [
+    61,185,40,39,37,0,267,269,270,409,291
   ]
 
-  const inner = [
+  const lowerLip = [
+    146,91,181,84,17,314,405,321,375
+  ]
+
+  const innerMouth = [
     78,95,88,178,87,14,317,402,318,324,308
   ]
 
   ctx.globalAlpha = 0.55
   ctx.fillStyle = color
 
-  // Draw outer lip shape
+  // -------- Upper Lip --------
   ctx.beginPath()
 
-  outer.forEach((i:number,index:number)=>{
+  upperLip.forEach((p:number,i:number)=>{
+    const x = landmarks[p].x * w
+    const y = landmarks[p].y * h
 
-    const x = landmarks[i].x * w
-    const y = landmarks[i].y * h
-
-    if(index===0) ctx.moveTo(x,y)
+    if(i===0) ctx.moveTo(x,y)
     else ctx.lineTo(x,y)
-
   })
 
   ctx.closePath()
   ctx.fill()
 
-  // Cut out inner mouth (teeth area)
+  // -------- Lower Lip --------
+  ctx.beginPath()
+
+  lowerLip.forEach((p:number,i:number)=>{
+    const x = landmarks[p].x * w
+    const y = landmarks[p].y * h
+
+    if(i===0) ctx.moveTo(x,y)
+    else ctx.lineTo(x,y)
+  })
+
+  ctx.closePath()
+  ctx.fill()
+
+  // -------- Remove Teeth Area --------
   ctx.globalCompositeOperation = "destination-out"
 
   ctx.beginPath()
 
-  inner.forEach((i:number,index:number)=>{
+  innerMouth.forEach((p:number,i:number)=>{
+    const x = landmarks[p].x * w
+    const y = landmarks[p].y * h
 
-    const x = landmarks[i].x * w
-    const y = landmarks[i].y * h
-
-    if(index===0) ctx.moveTo(x,y)
+    if(i===0) ctx.moveTo(x,y)
     else ctx.lineTo(x,y)
-
   })
 
   ctx.closePath()

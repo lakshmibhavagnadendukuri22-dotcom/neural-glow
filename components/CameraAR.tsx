@@ -124,56 +124,57 @@ function drawBlush(
   color: string,
   w: number,
   h: number
-){
+) {
 
-ctx.globalAlpha = 0.25
+  ctx.globalAlpha = 0.18   // very soft opacity
 
-const left = l[116]
-const right = l[345]
+  const leftCheekbone = l[116]
+  const rightCheekbone = l[345]
 
-if(!left || !right) return
+  if (!leftCheekbone || !rightCheekbone) return
 
-const faceWidth = Math.abs(l[234].x - l[454].x) * w
+  const faceWidth = Math.abs(l[234].x - l[454].x) * w
 
-const size = faceWidth * 0.18
+  const width = faceWidth * 0.35
+  const height = faceWidth * 0.16
 
-// LEFT CHEEK
-const lx = (left.x * w) + size * 0.3
-const ly = (left.y * h) - size * 0.1
+  // LEFT BLUSH POSITION
+  const lx = (leftCheekbone.x * w) + width * 0.35
+  const ly = (leftCheekbone.y * h) - height * 0.15
 
-const gradL = ctx.createRadialGradient(
-lx, ly, size * 0.2,
-lx, ly, size
-)
+  const gradL = ctx.createRadialGradient(
+    lx, ly, width * 0.05,
+    lx, ly, width
+  )
 
-gradL.addColorStop(0, color)
-gradL.addColorStop(0.5, color)
-gradL.addColorStop(1, "transparent")
+  gradL.addColorStop(0, color)
+  gradL.addColorStop(0.3, color)
+  gradL.addColorStop(1, "transparent")
 
-ctx.fillStyle = gradL
+  ctx.fillStyle = gradL
 
-ctx.beginPath()
-ctx.arc(lx, ly, size, 0, Math.PI * 2)
-ctx.fill()
+  ctx.beginPath()
+  ctx.ellipse(lx, ly, width, height, -0.55, 0, Math.PI * 2)
+  ctx.fill()
 
-// RIGHT CHEEK
-const rx = (right.x * w) - size * 0.3
-const ry = (right.y * h) - size * 0.1
+  // RIGHT BLUSH POSITION
+  const rx = (rightCheekbone.x * w) - width * 0.35
+  const ry = (rightCheekbone.y * h) - height * 0.15
 
-const gradR = ctx.createRadialGradient(
-rx, ry, size * 0.2,
-rx, ry, size
-)
+  const gradR = ctx.createRadialGradient(
+    rx, ry, width * 0.05,
+    rx, ry, width
+  )
 
-gradR.addColorStop(0, color)
-gradR.addColorStop(0.5, color)
-gradR.addColorStop(1, "transparent")
+  gradR.addColorStop(0, color)
+  gradR.addColorStop(0.3, color)
+  gradR.addColorStop(1, "transparent")
 
-ctx.fillStyle = gradR
+  ctx.fillStyle = gradR
 
-ctx.beginPath()
-ctx.arc(rx, ry, size, 0, Math.PI * 2)
-ctx.fill()
+  ctx.beginPath()
+  ctx.ellipse(rx, ry, width, height, 0.55, 0, Math.PI * 2)
+  ctx.fill()
 
 }
 
